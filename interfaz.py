@@ -1,5 +1,6 @@
 import tkinter as tk
 from estaciones import *
+from ruta import *
 
 #ventana principal
 root = tk.Tk()
@@ -52,8 +53,54 @@ def mostrar_ingreso_estacion():
     btn_guardar = tk.Button(root, text="guardar", command=guardar_datos)
     btn_guardar.pack()
 
-#btn - gestionar estaciones"
+def mostrar_ingreso_ruta():
+    root.title("Ingresar Ruta")
+
+    #id ruta
+    label_id = tk.Label(root, text="ID de la ruta:")
+    label_id.pack()
+    entrada_id = tk.Entry(root, width=20)
+    entrada_id.pack()
+
+    #estacion origen 
+    label_origen = tk.Label(root, text="Estación de origen:")
+    label_origen.pack()
+    entrada_origen = tk.Entry(root, width=20)
+    entrada_origen.pack()
+
+    #estacion destino -> aqui podria mostrar las estaciones disponibles en vez de ingresarla
+    label_destino = tk.Label(root, text="Estación de destino:")
+    label_destino.pack()
+    entrada_destino = tk.Entry(root, width=20)
+    entrada_destino.pack()
+
+    #longitud
+    label_longitud = tk.Label(root, text="Longitud (km):")
+    label_longitud.pack()
+    entrada_longitud = tk.Entry(root, width=20)
+    entrada_longitud.pack()
+
+    mensaje = tk.Label(root, text="")
+    mensaje.pack()
+
+    def guardar_ruta():
+        id_ruta = entrada_id.get()
+        origen = entrada_origen.get()
+        destino = entrada_destino.get()
+        longitud = entrada_longitud.get()
+
+        resultado = ingresar_ruta(id_ruta, origen, destino, longitud)
+        mensaje.config(text=resultado)
+
+    btn_guardar = tk.Button(root, text="Guardar Ruta", command=guardar_ruta)
+    btn_guardar.pack(pady=5)
+
+#btn - gestionar estaciones
 btn_gestionar = tk.Button(root, text="Gestionar estaciones", command=mostrar_ingreso_estacion)
 btn_gestionar.pack()
+
+#btn - gestionar rutas"
+btn_rutas = tk.Button(root, text="Gestionar Rutas", command=mostrar_ingreso_ruta)
+btn_rutas.pack(pady=20)
 
 root.mainloop()

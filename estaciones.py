@@ -13,7 +13,7 @@ def cargar_estaciones():
                 datos = x[1:]  #poblacion,vias,orientacion
                 estaciones[nombre] = datos #los guarda en el diccionario
     else:
-        open(archivo, 'w').close()  # crea el archivo si no existe
+        open(archivo, 'w').close()  #crea el archivo si no existe
 
 def guardar_estaciones():
     with open(archivo, 'w') as a:
