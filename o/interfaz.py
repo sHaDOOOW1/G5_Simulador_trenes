@@ -1,6 +1,6 @@
 import tkinter as tk
-from estaciones import *
-from ruta import *
+from o.estaciones import *
+from o.ruta import *
 
 #ventana principal
 root = tk.Tk()
