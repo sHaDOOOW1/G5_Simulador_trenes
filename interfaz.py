@@ -39,6 +39,6 @@ tk.Button(root, text="Gestionar Estaciones", command=gestionar_estaciones, padx=
 tk.Button(root, text="Gestionar Rutas", command=gestionar_rutas, padx=28, pady=10).place(x=100, y=120)
 tk.Button(root, text='Gestionar Trenes', command=gestionar_trenes, padx=27, pady=10).place(x=100, y=200)
 tk.Button(root, text="Generación de Demanda", command=generar_demanda, padx=15, pady=10).place(x=350, y=50)
-tk.Button(root, text="Guardar Simulación", command=None, padx=15, pady=10).place(x=820, y=480)
+tk.Button(root, text="Guardar Simulación", command=generar_demanda, padx=15, pady=10).place(x=820, y=480)
 
 root.mainloop()
