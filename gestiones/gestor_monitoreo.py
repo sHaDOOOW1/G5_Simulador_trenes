@@ -13,28 +13,23 @@ class GestorMonitoreo(tk.Toplevel):
         self.actualizar_datos()
 
     def create_widgets(self):
-        # Pestañas para diferentes vistas
-        tab_control = ttk.Notebook(self)
+        tab_control = ttk.Notebook(self) #pestañas para diferentes vistas
         
-        # Pestaña de indicadores clave
-        tab_indicadores = ttk.Frame(tab_control)
+        tab_indicadores = ttk.Frame(tab_control) #pestaña de indicadores clave
         self.setup_indicadores_tab(tab_indicadores)
         tab_control.add(tab_indicadores, text="Indicadores")
         
-        # Pestaña de eventos
-        tab_eventos = ttk.Frame(tab_control)
+        tab_eventos = ttk.Frame(tab_control) #pestaña de eventos
         self.setup_eventos_tab(tab_eventos)
         tab_control.add(tab_eventos, text="Eventos")
         
-        # Pestaña de tendencias
-        tab_tendencias = ttk.Frame(tab_control)
+        tab_tendencias = ttk.Frame(tab_control) #pestaña de tendencias
         self.setup_tendencias_tab(tab_tendencias)
         tab_control.add(tab_tendencias, text="Tendencias")
         
         tab_control.pack(expand=1, fill="both")
 
     def setup_indicadores_tab(self, parent):
-        # [Implementar widgets para mostrar KPIs]
         pass
 
     def setup_eventos_tab(self, parent):
@@ -44,22 +39,17 @@ class GestorMonitoreo(tk.Toplevel):
         for col in columns:
             self.tree.heading(col, text=col.capitalize())
             self.tree.column(col, width=100)
-        
         self.tree.pack(fill="both", expand=True)
-        
-        # Botón de actualización
         tk.Button(parent, text="Actualizar", command=self.actualizar_datos).pack()
 
     def setup_tendencias_tab(self, parent):
-        # [Implementar gráficos de tendencias]
         pass
 
-    def actualizar_datos(self):
-        # Actualizar eventos
+    def actualizar_datos(self):#actualizar eventos
         for item in self.tree.get_children():
             self.tree.delete(item)
             
-        for evento in self.estado.eventos[-50:]:  # Mostrar últimos 50 eventos
+        for evento in self.estado.eventos[-50:]:  #mostrar últimos 50 eventos
             self.tree.insert("", "end", values=(
                 evento["dia"],
                 evento["hora"],

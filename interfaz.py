@@ -11,6 +11,7 @@ from gestiones.gestor_rutas import GestorRutas
 from gestiones.gestor_trenes import GestorTrenes
 from gestiones.gestor_demanda import GestorDemanda
 from gestiones.gestor_eventos import GestorEventos 
+from gestiones.gestor_monitoreo import GestorMonitoreo
 
 from estado_simulacion import EstadoSimulacion
 
@@ -246,7 +247,7 @@ tk.Button(root, text="Gestionar Estaciones", command=gestionar_estaciones, padx=
 tk.Button(root, text="Gestionar Rutas", command=gestionar_rutas, padx=28, pady=10).place(x=100, y=210)
 tk.Button(root, text='Gestionar Trenes', command=gestionar_trenes, padx=27, pady=10).place(x=105, y=270)
 tk.Button(root, text="Gestionar Eventos", command=gestionar_eventos, padx=22, pady=10).place(x=100, y=340)
-tk.Button(root, text="Monitoreo", command=mostrar_monitoreo, padx=20, pady=10).place(x=350, y=150) #botones de simulación
+tk.Button(root, text="Monitoreo", command=lambda: GestorMonitoreo(estado), padx=20, pady=10).place(x=350, y=150) #botones de simulación
 tk.Button(root, text="Generación de Demanda", command=generar_demanda, padx=15, pady=10).place(x=350, y=210)
 tk.Button(root, text="Ver Estado de Trenes", command=mostrar_estado_trenes, padx=20, pady=10).place(x=350, y=270)  #estado trenes
 tk.Button(root, text="Ver Eventos", command=mostrar_eventos, padx=20, pady=10).place(x=350, y=340)
