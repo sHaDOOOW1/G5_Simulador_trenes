@@ -39,11 +39,17 @@ estado_label = tk.Label(cuadro, text="", bg="#f0f0f0", justify="left", anchor="n
 estado_label.place(x=10, y=40)
 label_dia = tk.Label(cuadro, text="Día:", bg="#f0f0f0", font=("Arial", 12, "bold"))
 label_dia.place(x=10, y=10)
+label_fecha = tk.Label(cuadro, text="", bg="#f0f0f0", font=("Arial", 12))
+label_fecha.place(x=60, y=10)
+label_hora1 = tk.Label(cuadro, text="Hora:", bg="#f0f0f0", font=("Arial", 12, "bold"))
+label_hora1.place(x=210, y=10)
+label_hora2 = tk.Label(cuadro, text="", bg="#f0f0f0", font=("Arial", 12))
+label_hora2.place(x=260, y=10)
 
 #indicadores
-indicador1_label = tk.Label(cuadro, text="Ocupación promedio: --%", bg="#f0f0f0", font=("Arial", 10))
+indicador1_label = tk.Label(cuadro, text="Ocupación promedio: --%", bg="#f0f0f0", font=("Arial", 11))
 indicador1_label.place(x=10, y=200)
-indicador2_label = tk.Label(cuadro, text="Personas satisfechas: --%", bg="#f0f0f0", font=("Arial", 10))
+indicador2_label = tk.Label(cuadro, text="Personas satisfechas: --%", bg="#f0f0f0", font=("Arial", 11))
 indicador2_label.place(x=10, y=230)
 
 def actualizar_estado():
@@ -56,6 +62,13 @@ def actualizar_estado():
         f"Eventos: {len(estado.eventos)}"  
     )
     estado_label.config(text=texto)
+    actualizar_fecha_y_hora()
+
+def actualizar_fecha_y_hora():
+    fecha = estado.hora_actual.strftime("%d/%m/%Y")
+    hora = estado.hora_actual.strftime("%H:%M")
+    label_fecha.config(text=fecha)
+    label_hora2.config(text=hora)
 
 def actualizar_indicadores():
     try:
@@ -233,7 +246,6 @@ tk.Button(root, text="Gestionar Estaciones", command=gestionar_estaciones, padx=
 tk.Button(root, text="Gestionar Rutas", command=gestionar_rutas, padx=28, pady=10).place(x=100, y=210)
 tk.Button(root, text='Gestionar Trenes', command=gestionar_trenes, padx=27, pady=10).place(x=105, y=270)
 tk.Button(root, text="Gestionar Eventos", command=gestionar_eventos, padx=22, pady=10).place(x=100, y=340)
-
 tk.Button(root, text="Monitoreo", command=mostrar_monitoreo, padx=20, pady=10).place(x=350, y=150) #botones de simulación
 tk.Button(root, text="Generación de Demanda", command=generar_demanda, padx=15, pady=10).place(x=350, y=210)
 tk.Button(root, text="Ver Estado de Trenes", command=mostrar_estado_trenes, padx=20, pady=10).place(x=350, y=270)  #estado trenes
