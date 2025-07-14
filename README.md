@@ -29,50 +29,50 @@ Ambos indicadores se actualizan en tiempo real y se muestran en la interfaz prin
 #Determinismo
 Actualmente, la generación de demanda no incluye control explícito de semilla, por lo que puede considerarse pseudoaleatoria. Se puede adaptar fácilmente para ser determinista en futuras versiones, usando una semilla basada en parámetros del estado.
 
-#Cómo usar
-Ejecuta interfaz.py.
+##Cómo usar
+   -Ejecuta interfaz.py.
 
-Usa los botones para gestionar estaciones, rutas, trenes, demanda y eventos.
+   -Usa los botones para gestionar estaciones, rutas, trenes, demanda y eventos.
 
-Puedes pausar/iniciar la simulación, avanzar eventos, ver el monitoreo y el estado de los trenes en tiempo real.
+   -Puedes pausar/iniciar la simulación, avanzar eventos, ver el monitoreo y el estado de los trenes en tiempo real.
 
-Guarda y carga simulaciones desde la interfaz.
+   -Guarda y carga simulaciones desde la interfaz.
 
-Usa "Nueva Simulación" para restaurar los datos base del sistema.
+   -Usa "Nueva Simulación" para restaurar los datos base del sistema.
 
-Documentación de entidades y eventos
-Estación: Nombre, población, vías, flujo acumulado.
+   -Documentación de entidades y eventos
+   -Estación: Nombre, población, vías, flujo acumulado.
 
-Ruta: Origen, destino, longitud.
+   -Ruta: Origen, destino, longitud.
 
-Tren: Nombre, velocidad, vagones (capacidad), flujo acumulado, acción actual.
+   -Tren: Nombre, velocidad, vagones (capacidad), flujo acumulado, acción actual.
 
-Persona: ID, estación origen, estación destino, estado, satisfecho.
+   -Persona: ID, estación origen, estación destino, estado, satisfecho.
 
-Evento: Nombre, descripción, fecha (ver logica/evento.py).
+   -Evento: Nombre, descripción, fecha (ver logica/evento.py).
 
-#Robustez y restricciones
--El sistema impide algunas acciones inválidas (por ejemplo, trenes con sobreocupación).
+##Robustez y restricciones
+   -El sistema impide algunas acciones inválidas (por ejemplo, trenes con sobreocupación).
 
--La interfaz maneja errores comunes del usuario mediante mensajes claros.
+   -La interfaz maneja errores comunes del usuario mediante mensajes claros.
 
--La simulación puede ser pausada y reanudada.
+   -La simulación puede ser pausada y reanudada.
 
 #Decisiones de diseño
--La arquitectura permite extender fácilmente atributos y tipos de entidades.
+   -La arquitectura permite extender fácilmente atributos y tipos de entidades.
 
--Se priorizó una interfaz simple, con botones visibles para cada acción relevante.
+   -Se priorizó una interfaz simple, con botones visibles para cada acción relevante.
 
--Los datos pueden ser guardados y cargados sin perder el estado actual de la simulación.
+   -Los datos pueden ser guardados y cargados sin perder el estado actual de la simulación.
 
-#Limitaciones actuales
--No es posible retroceder en la línea de eventos.
+##Limitaciones actuales
+   -No es posible retroceder en la línea de eventos.
 
--No se permite modificar la función de generación de demanda desde la GUI.
+   -No se permite modificar la función de generación de demanda desde la GUI.
 
--La lógica de movimiento de trenes aún no se encuentra completamente implementada.
+   -La lógica de movimiento de trenes aún no se encuentra completamente implementada.
 
--La generación de personas no es determinista (aunque puede adaptarse fácilmente).
+   -La generación de personas no es determinista (aunque puede adaptarse fácilmente).
 
 
 
