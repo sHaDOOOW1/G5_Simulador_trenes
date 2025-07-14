@@ -15,12 +15,12 @@ class EstadoSimulacion:
         self.resetear()
         self.nombre_simulacion = "simulacion_1"
         self.dia_actual = 0
-        self.hora_actual = datetime(2015, 3, 1, 7, 0)  # 7 AM por defecto
+        self.hora_actual = datetime(2015, 3, 1, 7, 0)  #7 AM por defecto
         self.pausada = False
         self.lineas_temporales = []
-        self.historial_estados = []  # <-- Asegúrate de inicializar esto
+        self.historial_estados = []  
         self.inicializar_indicadores()
-        self.cargar_datos_base()  # <-- Cargar datos base al iniciar
+        self.cargar_datos_base()  #carga datos base al iniciar
 
     def inicializar_indicadores(self):
         self.indicadores = {
@@ -40,11 +40,10 @@ class EstadoSimulacion:
         self.eventos = []
         self.historial_personas = []
         self.evento_actual = -1
-        self.historial_estados = []  # <-- Asegúrate de reiniciar esto
+        self.historial_estados = []
         self.inicializar_indicadores()
 
     def cargar_datos_base(self):
-        # Estaciones
         ec = Estacion(
             nombre="Estación Central (Santiago)",
             poblacion=8242459,
@@ -71,7 +70,7 @@ class EstadoSimulacion:
         )
         self.estaciones = [ec, ran, tal, chi]
 
-        # Rutas
+        #rutas
         self.rutas = [
             Ruta(origen=ec, destino=ran, longitud=87),
             Ruta(origen=ran, destino=tal, longitud=200),
@@ -79,7 +78,7 @@ class EstadoSimulacion:
             Ruta(origen=chi, destino=ec, longitud=467),  # Suma de distancias para el retorno
         ]
 
-        # Trenes
+        #trenes
         self.trenes = [
             Tren(nombre="Tren BMU (Bimodal)", velocidad=160, vagones=[{"capacidad": 236}], flujo_acumulado=0, accion="detenido"),
             Tren(nombre="Tren EMU – EFE SUR", velocidad=120, vagones=[{"capacidad": 236}], flujo_acumulado=0, accion="detenido"),
@@ -94,7 +93,7 @@ class EstadoSimulacion:
     def avanzar_tiempo(self):
         if self.pausada:
             return
-        # Avanza una hora
+        #avanza una hora
         self.hora_actual = self.hora_actual.replace(minute=0, second=0, microsecond=0)
         self.hora_actual += timedelta(hours=1)
         if self.hora_actual.hour > 20:  # 20:00 hrs fin de jornada
@@ -127,15 +126,13 @@ class EstadoSimulacion:
                     estacion_origen=estacion.nombre,
                     fecha_creacion=self.hora_actual,
                     estacion_destino=destino.nombre,
-                    fecha_regreso=None  # Puedes agregar lógica para esto
+                    fecha_regreso=None 
                 )
                 self.personas.append(persona)
 
     def mover_trenes(self):
         for tren in self.trenes:
-            # Ajusta según tu clase Tren
             if hasattr(tren, "accion") and tren.accion == "En ruta":
-                # Lógica de movimiento determinista
                 pass
 
     def pausar(self):
@@ -181,15 +178,11 @@ class EstadoSimulacion:
 
     def procesar_evento(self, evento):
         if evento.tipo == TiposEvento.TREN_PARTIO:
-            # Lógica para cuando un tren parte
             pass
-        elif evento.tipo == TiposEvento.TREN_LLEGO:
-            # Lógica para cuando un tren llega
+        elif evento.tipo == TiposEvento.TREN_LLEGO: #para cuando un tren llega
             pass
         elif evento.tipo == TiposEvento.SIMULACION_PAUSADA:
-            # Lógica para pausar la simulación
             pass
-        # ...otros tipos de eventos...
 
     def guardar_estado(self, archivo):
         # Ejemplo simple de guardado
@@ -205,7 +198,3 @@ class EstadoSimulacion:
             data = json.load(f)
             self.dia_actual = data.get("dia_actual", 0)
             self.hora_actual = datetime.fromisoformat(data.get("hora_actual", "2015-03-01T07:00:00"))
-            # Agrega aquí la lógica para restaurar el resto del estado
-
-    # ...otros métodos según necesidades...
-    # ...otros métodos según necesidades...

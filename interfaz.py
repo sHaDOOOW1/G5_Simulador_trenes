@@ -14,7 +14,7 @@ from gestiones.gestor_eventos import GestorEventos
 
 from estado_simulacion import EstadoSimulacion
 
-estado = EstadoSimulacion() #creainstancia global del estado
+estado = EstadoSimulacion() #crea instancia global del estado
 
 def nueva_simulacion():
     global estado
@@ -35,10 +35,8 @@ except Exception:
 
 cuadro = tk.Frame(root, bg="#f0f0f0", width=350, height=420)
 cuadro.place(x=610, y=50)
-
 estado_label = tk.Label(cuadro, text="", bg="#f0f0f0", justify="left", anchor="nw", font=("Arial", 10))
 estado_label.place(x=10, y=40)
-
 label_dia = tk.Label(cuadro, text="Día:", bg="#f0f0f0", font=("Arial", 12, "bold"))
 label_dia.place(x=10, y=10)
 
@@ -182,13 +180,23 @@ def avanzar_evento():#lógica para el siguiente evento
     else:
         messagebox.showinfo("Info", "Funcionalidad no implementada.")
 
-def iniciar_pausar_simulacion():
-    estado.pausada = not estado.pausada
+def iniciar_simulacion():
     if estado.pausada:
-        messagebox.showinfo("Simulación", "Simulación pausada.")
+        estado.pausada = False
+        estado.registrar_evento("Simulación reanudada")
+        messagebox.showinfo("Simulación", "La simulación ya esta iniciada")
+        actualizar_estado()
     else:
-        messagebox.showinfo("Simulación", "Simulación en marcha.")
-    actualizar_estado()
+        messagebox.showinfo("Simulación", "Simulación iniciada")
+
+def pausar_simulacion():
+    if not estado.pausada:
+        estado.pausada = True
+        estado.registrar_evento("Simulación pausada")
+        messagebox.showinfo("Simulación", "Simulación pausada")
+        actualizar_estado()
+    else:
+        messagebox.showinfo("Simulación", "La simulación ya está pausada")
 
 def mostrar_estado_trenes():
     ventana = tk.Toplevel()
@@ -217,22 +225,22 @@ def mostrar_estado_trenes():
     btn_actualizar.pack(pady=5)
     refrescar()
 
-# Botones principales
-tk.Button(root, text="Gestionar Estaciones", command=gestionar_estaciones, padx=15, pady=10).place(x=100, y=50)
-tk.Button(root, text="Gestionar Rutas", command=gestionar_rutas, padx=28, pady=10).place(x=100, y=120)
-tk.Button(root, text='Gestionar Trenes', command=gestionar_trenes, padx=27, pady=10).place(x=100, y=200)
-tk.Button(root, text="Generación de Demanda", command=generar_demanda, padx=15, pady=10).place(x=350, y=50)
-tk.Button(root, text="Gestionar Eventos", command=gestionar_eventos, padx=22, pady=10).place(x=100, y=280)
-tk.Button(root, text="Nueva Simulación", command=nueva_simulacion, padx=20, pady=10, bg="#e0e0e0").place(x=100, y=350)
-tk.Button(root, text="Ver Eventos", command=mostrar_eventos, padx=20, pady=10).place(x=350, y=350)
-tk.Button(root, text="Iniciar/Pausar Simulación", command=iniciar_pausar_simulacion, padx=20, pady=10).place(x=100, y=410)  # <-- Botón iniciar/pausar
-tk.Button(root, text="Ver Estado de Trenes", command=mostrar_estado_trenes, padx=20, pady=10).place(x=350, y=410)  # <-- Botón estado trenes
+#botones principales
+tk.Button(root, text="Iniciar Simulación", command=iniciar_simulacion, padx=15, pady=10).place(x=100, y=50) 
+tk.Button(root, text="Pausar Simulación", command=pausar_simulacion, padx=20, pady=10).place(x=260, y=50) 
+tk.Button(root, text="Nueva Simulación", command=nueva_simulacion, padx=20, pady=10, bg="#e0e0e0").place(x=430, y=50)
+tk.Button(root, text="Gestionar Estaciones", command=gestionar_estaciones, padx=20, pady=10).place(x=100, y=150)
+tk.Button(root, text="Gestionar Rutas", command=gestionar_rutas, padx=28, pady=10).place(x=100, y=210)
+tk.Button(root, text='Gestionar Trenes', command=gestionar_trenes, padx=27, pady=10).place(x=105, y=270)
+tk.Button(root, text="Gestionar Eventos", command=gestionar_eventos, padx=22, pady=10).place(x=100, y=340)
 
-# Botones de simulación
-tk.Button(root, text="Guardar Simulación", command=guardar_simulacion, padx=15, pady=10).place(x=820, y=480)
-tk.Button(root, text="Cargar Simulación", command=cargar_simulacion, padx=15, pady=10).place(x=820, y=430)
-tk.Button(root, text="Monitoreo", command=mostrar_monitoreo, padx=20, pady=10).place(x=350, y=120)
-tk.Button(root, text="Avanzar al próximo evento", command=avanzar_evento, padx=10, pady=10).place(x=350, y=200)
-actualizar_estado()  # Mostrar datos iniciales
+tk.Button(root, text="Monitoreo", command=mostrar_monitoreo, padx=20, pady=10).place(x=350, y=150) #botones de simulación
+tk.Button(root, text="Generación de Demanda", command=generar_demanda, padx=15, pady=10).place(x=350, y=210)
+tk.Button(root, text="Ver Estado de Trenes", command=mostrar_estado_trenes, padx=20, pady=10).place(x=350, y=270)  #estado trenes
+tk.Button(root, text="Ver Eventos", command=mostrar_eventos, padx=20, pady=10).place(x=350, y=340)
+tk.Button(root, text="Avanzar al próximo evento", command=avanzar_evento, padx=10, pady=10).place(x=350, y=400) #botones de simulación
+tk.Button(root, text="Guardar Simulación", command=guardar_simulacion, padx=15, pady=10).place(x=820, y=480) #botones de simulación
+tk.Button(root, text="Cargar Simulación", command=cargar_simulacion, padx=15, pady=10).place(x=820, y=430) #botones de simulación
+actualizar_estado()  #muestra los datos iniciales
 
 root.mainloop()

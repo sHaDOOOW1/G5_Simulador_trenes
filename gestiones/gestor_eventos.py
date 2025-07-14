@@ -29,7 +29,6 @@ class GestorEventos:
     def agregar_evento(self):
         nombre = simpledialog.askstring("Nuevo Evento", "Nombre del evento:")
         if nombre:
-            # Suponiendo que hay una clase Evento en logica.evento
             try:
                 from logica.evento import Evento
                 nuevo_evento = Evento(nombre)
