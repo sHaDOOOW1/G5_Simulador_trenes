@@ -47,9 +47,9 @@ label_hora2 = tk.Label(cuadro, text="", bg="#f0f0f0", font=("Arial", 12))
 label_hora2.place(x=260, y=10)
 
 #indicadores
-indicador1_label = tk.Label(cuadro, text="Ocupación promedio: --%", bg="#f0f0f0", font=("Arial", 11))
+indicador1_label = tk.Label(cuadro, text="Ocupación promedio: --%", bg="#f0f0f0", font=("Arial", 10))
 indicador1_label.place(x=10, y=200)
-indicador2_label = tk.Label(cuadro, text="Personas satisfechas: --%", bg="#f0f0f0", font=("Arial", 11))
+indicador2_label = tk.Label(cuadro, text="Personas satisfechas: --%", bg="#f0f0f0", font=("Arial", 10))
 indicador2_label.place(x=10, y=230)
 
 def actualizar_estado():
