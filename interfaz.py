@@ -4,22 +4,21 @@ from tkinter import filedialog, messagebox
 from logica.estaciones import *
 from logica.ruta import *
 from logica.trenes import *
-from logica.evento import *  # <-- Importar eventos
+from logica.evento import *  
 
 from gestiones.gestor_estaciones import GestorEstaciones
 from gestiones.gestor_rutas import GestorRutas
 from gestiones.gestor_trenes import GestorTrenes
 from gestiones.gestor_demanda import GestorDemanda
-from gestiones.gestor_eventos import GestorEventos  # <-- Importar gestor de eventos
+from gestiones.gestor_eventos import GestorEventos 
 
 from estado_simulacion import EstadoSimulacion
 
-# Crear instancia global del estado
-estado = EstadoSimulacion()
+estado = EstadoSimulacion() #creainstancia global del estado
 
 def nueva_simulacion():
     global estado
-    estado = EstadoSimulacion()  # Reinicia todo con datos base
+    estado = EstadoSimulacion()  #reinicia todo con la informacion de datos base
     actualizar_estado()
     messagebox.showinfo("Nueva Simulación", "La simulación ha sido reiniciada con los datos predeterminados.")
 
@@ -28,15 +27,12 @@ root.title("Sistema de Simulación de Tráfico Ferroviario")
 root.geometry("1022x574")
 root.resizable(False, False)
 
-# Imagen de fondo
 try:
-    bg = tk.PhotoImage(file="bg.png")
+    bg = tk.PhotoImage(file="bg.png") #img fondo
     tk.Label(root, image=bg).place(x=-3, y=-3)
 except Exception:
-    # Si no existe la imagen, continuar sin ella
-    pass
+    pass #si no existe la imagen continua 
 
-# Cuadro decorativo: debe ir antes de usarlo para colocar widgets dentro
 cuadro = tk.Frame(root, bg="#f0f0f0", width=350, height=420)
 cuadro.place(x=610, y=50)
 
@@ -46,7 +42,7 @@ estado_label.place(x=10, y=40)
 label_dia = tk.Label(cuadro, text="Día:", bg="#f0f0f0", font=("Arial", 12, "bold"))
 label_dia.place(x=10, y=10)
 
-# Indicadores
+#indicadores
 indicador1_label = tk.Label(cuadro, text="Ocupación promedio: --%", bg="#f0f0f0", font=("Arial", 10))
 indicador1_label.place(x=10, y=200)
 indicador2_label = tk.Label(cuadro, text="Personas satisfechas: --%", bg="#f0f0f0", font=("Arial", 10))
@@ -59,12 +55,11 @@ def actualizar_estado():
         f"Trenes: {len(estado.trenes)}\n"
         f"Vías: {len(estado.vias)}\n"
         f"Personas: {len(estado.personas)}\n"
-        f"Eventos: {len(estado.eventos)}"  # <-- Mostrar eventos
+        f"Eventos: {len(estado.eventos)}"  
     )
     estado_label.config(text=texto)
 
 def actualizar_indicadores():
-    # Ejemplo simple, reemplaza con tu lógica real
     try:
         ocupacion = sum([t.ocupacion for t in estado.trenes]) / len(estado.trenes)
         satisfechos = len([p for p in estado.personas if p.satisfecho]) / len(estado.personas) * 100
@@ -107,8 +102,7 @@ def mostrar_monitoreo():
         )
         texto.insert('1.0', info)
         texto.config(state='disabled')
-        # Refresca automáticamente cada 2 segundos
-        ventana.after(2000, refrescar)
+        ventana.after(2000, refrescar) #refresca automáticamente cada 2 segundos
 
     btn_actualizar = tk.Button(ventana, text="Actualizar", command=refrescar)
     btn_actualizar.pack(pady=5)
@@ -183,8 +177,7 @@ def cargar_simulacion():
             messagebox.showerror("Error", f"No se pudo cargar: {e}")
         actualizar_estado()
 
-def avanzar_evento():
-    # Lógica para avanzar al siguiente evento
+def avanzar_evento():#lógica para el siguiente evento
     if hasattr(estado, "avanzar_al_siguiente_evento"):
         estado.avanzar_al_siguiente_evento()
         actualizar_estado()
@@ -214,7 +207,6 @@ def mostrar_estado_trenes():
         for tren in estado.trenes:
             nombre = getattr(tren, "nombre", "")
             accion = getattr(tren, "accion", "desconocido")
-            # Si tienes atributos de tiempo estimado de llegada, muéstralos aquí
             llegada = getattr(tren, "tiempo_llegada", "N/A")
             info += f"- {nombre}: {accion}"
             if accion == "En ruta":
