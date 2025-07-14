@@ -161,9 +161,7 @@ def guardar_simulacion():
             messagebox.showinfo("Éxito", "Simulación guardada correctamente.")
         except Exception as e:
             messagebox.showerror("Error", f"No se pudo guardar: {e}")
-        actualizar_estado()
-
-        
+        actualizar_estado()     
 
 def cargar_simulacion():
     archivo = filedialog.askopenfilename(defaultextension=".json",
