@@ -1,6 +1,17 @@
 import csv
 import os
 
+class Tren:
+    def __init__(self, nombre, velocidad, vagones, flujo_acumulado=0, accion="detenido"):
+        self.nombre = nombre
+        self.velocidad = velocidad  # km/h
+        self.vagones = vagones      # lista de dicts: [{"capacidad": int}]
+        self.flujo_acumulado = flujo_acumulado
+        self.accion = accion        # acción actual del tren
+
+    def __str__(self):
+        return f"{self.nombre} ({self.velocidad} km/h, {len(self.vagones)} vagones)"
+
 trenes_base = {
     "BMU (Bimodal)": {
         "energia": ["Eléctrico", "Diésel"],
@@ -30,13 +41,16 @@ def cargar_trenes():
                 datos = linea[1:]
                 trenes[nombre] = datos
                 datos_cargados = True
+            # Si el archivo existe pero está vacío o inválido, cargar trenes base
             if not datos_cargados:
-                for nombre, info in trenes_base.items(): #cargar trenes base 
+                for nombre, info in trenes_base.items():
                     trenes[nombre] = ["0", "0"]
+                guardar_trenes()
     else:
         open(archivo, 'w').close()
         for nombre, info in trenes_base.items():
             trenes[nombre] = ["0", "0"]
+        guardar_trenes()
 
 def guardar_trenes():
     with open(archivo, 'w') as f:

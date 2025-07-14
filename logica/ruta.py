@@ -4,6 +4,15 @@ import os
 rutas = {}
 archivo = 'rutas.csv'
 
+class Ruta:
+    def __init__(self, origen, destino, longitud):
+        self.origen = origen      # Estacion de origen (objeto o nombre)
+        self.destino = destino    # Estacion de destino (objeto o nombre)
+        self.longitud = longitud # en km
+
+    def __str__(self):
+        return f"{self.origen} → {self.destino} ({self.longitud} km)"
+
 def cargar_rutas():
     if os.path.exists(archivo):  #si el archivo existe
         with open(archivo, 'r') as f:

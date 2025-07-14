@@ -56,11 +56,11 @@ def cargar_estaciones():
                 estaciones[nombre] = datos
                 datos_cargados = True
 
-            if not datos_cargados:  # si estaba vacío o inválido, cargar base
+            # Si el archivo existe pero está vacío o inválido, cargar base
+            if not datos_cargados:
                 for nombre, datos in estaciones_base.items():
                     estaciones[nombre] = [datos["poblacion"], datos["vias"], datos["orientacion"]]
                 guardar_estaciones()
-
     else:
         # si el archivo no existe, lo crea y carga datos base
         open(archivo, 'w').close()
@@ -110,3 +110,13 @@ def modificar_estacion(anterior, nuevo, poblacion, vias, orientacion_vias):
     estaciones[nuevo] = [poblacion, str(vias), orientacion_vias]
     guardar_estaciones()
     return "Estación modificada correctamente"
+
+class Estacion:
+    def __init__(self, nombre, poblacion, vias=None, flujo_acumulado=0):
+        self.nombre = nombre
+        self.poblacion = poblacion
+        self.vias = vias if vias is not None else []
+        self.flujo_acumulado = flujo_acumulado
+
+    def __str__(self):
+        return f"{self.nombre} (Población: {self.poblacion})"
