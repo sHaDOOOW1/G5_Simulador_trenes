@@ -185,7 +185,6 @@ class EstadoSimulacion:
             pass
 
     def guardar_estado(self, archivo):
-        # Ejemplo simple de guardado
         with open(archivo, 'w') as f:
             json.dump({
                 "dia_actual": self.dia_actual,
